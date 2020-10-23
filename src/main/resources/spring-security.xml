@@ -1,0 +1,29 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/security
+        https://www.springframework.org/schema/security/spring-security.xsd">
+    <!-- spring security有两种认证方式： http-basic / form-login -->
+    <http use-expressions="false">
+        <form-login/>
+<!--    <form-login login-page="/userLogin" login-processing-url="/checkLogin" default-target-url="/main"/>-->
+        <intercept-url pattern="/**" access="ROLE_ADMIN, ROLE_USER" />
+<!--        <intercept-url pattern="/show" access="ROLE_ADMIN, ROLE_USER" />-->
+<!--        <intercept-url pattern="/add" access="ROLE_ADMIN" />-->
+<!--        <intercept-url pattern="/deleteById" access="ROLE_ADMIN" />-->
+<!--        <intercept-url pattern="/edit" access="ROLE_ADMIN" />-->
+<!--        <intercept-url pattern="/queryById" access="ROLE_ADMIN, ROLE_USER" />-->
+<!--        <intercept-url pattern="/selectByClassNameOrName" access="ROLE_ADMIN, ROLE_USER" />-->
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="{noop}123" authorities="ROLE_ADMIN"></user>
+                <user name="root" password="{noop}123" authorities="ROLE_USER"></user>
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+</beans:beans>
